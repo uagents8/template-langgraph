@@ -5,11 +5,13 @@
 A small [LangGraph](https://www.langchain.com/langgraph) agent behind
 [FastAPI](https://fastapi.tiangolo.com), ready to deploy on
 [uAgents8](https://uagents8.com) and to replace with your own graph. One of three
-one-click framework templates planned for uAgents8: this one, CrewAI and the OpenAI Agents SDK.
+one-click framework templates for uAgents8: this one, CrewAI and the OpenAI Agents SDK.
 
-> **Today, the badge opens the dashboard**, where **+ Deploy Agent -> Source -> GitHub**,
-> pointed at this repository, deploys it in the steps below - a dedicated "Templates" option in
-> the wizard is coming soon. **Use this as a GitHub template.**
+> **Use it one click**: the deploy wizard's **Source** step has a **Templates** card next to
+> GitHub/GitLab/Bitbucket - pick **LangGraph starter** there and the wizard handles everything
+> below for you. The badge above also just opens the dashboard - from there, the same
+> Templates card is the fastest path.
+> **Use this as a GitHub template.**
 > Click **Use this template** above to create your own copy in *your* GitHub account - never a
 > write back to this repository. Download the code instead if you'd rather redeploy through
 > Code Archive.
@@ -77,10 +79,12 @@ Checks: `pip install -r requirements-dev.txt && ruff check . && pytest`.
 
 1. Press **+ Deploy Agent**.
 2. **Details**: give it a name.
-3. **Source**: either **GitHub** (this repository, branch `main`) or **Code Archive**: from this
-   folder run `zip template-langgraph.zip main.py requirements.txt` and upload the file.
-4. **Configure**: **Execution mode** **Continuous Service**, resource size **T** (256 MB - see
-   `uagents8.json`'s `recommended_size`), and your provider's key if you have one.
+3. **Source**: pick **Templates**, then **LangGraph starter** - or, by hand, either **GitHub**
+   (this repository, branch `main`) or **Code Archive**: from this folder run
+   `zip template-langgraph.zip main.py requirements.txt` and upload the file.
+4. **Configure**: picking **Templates** already sets **Execution mode** **Continuous Service**
+   and resource size **T** (256 MB - see `uagents8.json`'s `recommended_size`) for you; pick
+   your provider and paste its key if you have one.
 5. **Confirm**, then **Deploy agent**.
 
 When the status screen says **Running**, open the agent's URL and call it the same way as on your

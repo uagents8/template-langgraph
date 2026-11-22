@@ -1,20 +1,16 @@
-"""A LangGraph agent behind FastAPI - the uagents8 "LangGraph" template (#1882 Phase 1).
+"""A LangGraph agent behind FastAPI - the uAgents8 "LangGraph" template.
 
-Forked from docs/marketing/framework-samples/langgraph (verified green,
-docs/marketing/framework-e2e.md row 1, 2026-10-28) and extended for the templates catalog with a
-provider choice and a friendlier "no key" answer. Kept deliberately close to that proven sample -
-same graph shape, same tool node, same pinned dependencies - so nothing about the measured
-footprint changes: neither `langchain-openai` nor `langchain-anthropic` is installed by default
-(see requirements.txt), both are imported lazily inside respond(), exactly like the original
-sample's own OPENAI_API_KEY branch already did.
+Kept close to a small, proven shape - one tool node, one model node, pinned dependencies - so
+the measured footprint stays small: neither `langchain-openai` nor `langchain-anthropic` is
+installed by default (see requirements.txt), both are imported lazily inside respond().
 
   GET  /      health - the platform only checks that the port accepts connections
   POST /chat  {"message": "..."} -> {"message", "reply", "mode"}
 
-Provider (owner decision 2026-11-21): set LLM_PROVIDER to "openai" (default) or "anthropic", and
-the matching OPENAI_API_KEY / ANTHROPIC_API_KEY under Environment Variables with Sensitive on.
-With no key set the template still starts and answers - see NO_KEY_MESSAGE below, a deliberately
-better first impression than refusing to boot.
+Provider: set LLM_PROVIDER to "openai" (default) or "anthropic", and the matching
+OPENAI_API_KEY / ANTHROPIC_API_KEY under Environment Variables with Sensitive on. With no key
+set the template still starts and answers - see NO_KEY_MESSAGE below, a deliberately better
+first impression than refusing to boot.
 
 Make it yours: replace the body of respond().
 """

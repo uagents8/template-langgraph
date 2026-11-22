@@ -1,0 +1,51 @@
+{
+  "$comment": "One-click agent templates (#1882 Phase 1). This manifest is the single source of truth for the Configure step's env-var form once GET /v1/templates reads real published repos instead of backend/app/services/templates_catalog.py's mock list - keep the two in sync by hand until that happens (there is no shared-schema generation step between this repo and the uagents8 monorepo).",
+  "slug": "langgraph",
+  "name": "LangGraph starter",
+  "framework": "LangGraph",
+  "description": "A LangGraph graph with a calculator tool and a model node, behind FastAPI.",
+  "language": "python",
+  "entrypoint": "main.py",
+  "recommended_size": "T",
+  "measured_peak_memory_mb": 80,
+  "measured_on": "2026-10-28",
+  "providers": ["openai", "anthropic"],
+  "env_vars": [
+    {
+      "key": "LLM_PROVIDER",
+      "label": "LLM provider",
+      "required": false,
+      "secret": false,
+      "default": "openai",
+      "help_text": "\"openai\" or \"anthropic\". Defaults to openai if unset."
+    },
+    {
+      "key": "OPENAI_API_KEY",
+      "label": "OpenAI API key",
+      "required": false,
+      "secret": true,
+      "provider": "openai",
+      "help_text": "Needed only when LLM_PROVIDER is \"openai\" (or by default). The template still starts and answers without it."
+    },
+    {
+      "key": "ANTHROPIC_API_KEY",
+      "label": "Anthropic API key",
+      "required": false,
+      "secret": true,
+      "provider": "anthropic",
+      "help_text": "Needed only when LLM_PROVIDER is \"anthropic\". The template still starts and answers without it."
+    },
+    {
+      "key": "MODEL_NAME",
+      "label": "Model name",
+      "required": false,
+      "secret": false,
+      "help_text": "Optional override, e.g. gpt-4o-mini (OpenAI, default) or claude-3-5-haiku-latest (Anthropic, default)."
+    }
+  ],
+  "sample_request": {
+    "method": "POST",
+    "path": "/chat",
+    "body": { "message": "what is 2+3*4?" }
+  }
+}

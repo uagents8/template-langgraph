@@ -5,12 +5,11 @@
 A small [LangGraph](https://www.langchain.com/langgraph) agent behind
 [FastAPI](https://fastapi.tiangolo.com), ready to deploy on
 [uAgents8](https://uagents8.com) and to replace with your own graph. One of three
-one-click framework templates (issue #1882): this one, CrewAI and the OpenAI Agents SDK.
+one-click framework templates planned for uAgents8: this one, CrewAI and the OpenAI Agents SDK.
 
 > **Today, the badge opens the dashboard**, where **+ Deploy Agent -> Source -> GitHub**,
-> pointed at this repository, deploys it in the steps below - the wizard has no dedicated
-> "Templates" tile yet (Phase 2 of #1882: a `?template=langgraph`-style prefilled link needs
-> that UI to exist first, see `OWNER-PUBLISH-TEMPLATE.md`). **Use this as a GitHub template.**
+> pointed at this repository, deploys it in the steps below - a dedicated "Templates" option in
+> the wizard is coming soon. **Use this as a GitHub template.**
 > Click **Use this template** above to create your own copy in *your* GitHub account - never a
 > write back to this repository. Download the code instead if you'd rather redeploy through
 > Code Archive.
@@ -41,7 +40,7 @@ It needs **no API key and no network** to start. Set `LLM_PROVIDER` to `openai` 
 or `anthropic`, and the matching `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` under
 **Environment Variables** (**Sensitive** on). With neither key set, `POST /chat` still answers -
 with a message that says exactly what to add - instead of refusing to start: a better first
-impression than a crash loop (`uagents8.json`'s `env_vars`, owner decision 2026-11-21).
+impression than a crash loop (see `uagents8.json`'s `env_vars`).
 
 The place you change to make it your own is `respond()` in `main.py`.
 

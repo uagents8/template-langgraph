@@ -44,7 +44,9 @@ TERMINAL_FAILURE_PHASES = {"failed_build", "failed_deploy", "failed_health_check
 
 def _request(method: str, path: str, *, body: bytes | None = None, content_type: str | None = None) -> dict:
     url = f"{API_URL}{path}"
-    headers = {"Authorization": f"Bearer {TOKEN}"}
+    # Cloudflare returns 1010 for urllib's default UA (confirmed live 2026-11-24, same fix as
+    # the main monorepo's scripts/live_agent_cases.py) - a real browser/custom UA is required.
+    headers = {"Authorization": f"Bearer {TOKEN}", "User-Agent": "uagents8-template-deploy-check/1.0"}
     if content_type:
         headers["Content-Type"] = content_type
     req = urllib.request.Request(url, data=body, headers=headers, method=method)
@@ -113,7 +115,10 @@ def _wait_for_running(app_id: str) -> dict:
 def _call_chat(agent_url: str) -> None:
     payload = json.dumps({"message": "what is 2+3*4?"}).encode("utf-8")
     req = urllib.request.Request(
-        f"{agent_url.rstrip('/')}/chat", data=payload, headers={"Content-Type": "application/json"}, method="POST",
+        f"{agent_url.rstrip('/')}/chat", data=payload, headers={
+            "Content-Type": "application/json",
+            "User-Agent": "uagents8-template-deploy-check/1.0",
+        }, method="POST",
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
         body = json.loads(resp.read())

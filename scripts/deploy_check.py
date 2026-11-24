@@ -115,7 +115,10 @@ def _wait_for_running(app_id: str) -> dict:
 def _call_chat(agent_url: str) -> None:
     payload = json.dumps({"message": "what is 2+3*4?"}).encode("utf-8")
     req = urllib.request.Request(
-        f"{agent_url.rstrip('/')}/chat", data=payload, headers={"Content-Type": "application/json", "User-Agent": "uagents8-template-deploy-check/1.0"}, method="POST",
+        f"{agent_url.rstrip('/')}/chat", data=payload, headers={
+            "Content-Type": "application/json",
+            "User-Agent": "uagents8-template-deploy-check/1.0",
+        }, method="POST",
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
         body = json.loads(resp.read())
